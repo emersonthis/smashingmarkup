@@ -3,6 +3,8 @@
 
 ### something else
 
+![alt text](./someimg.png "A title")
+
 * one
 * two 
 * three

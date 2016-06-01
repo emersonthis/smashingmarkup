@@ -19,14 +19,21 @@ callback is a function that is called after parsing. It takes two arguments (err
  */
 // pdc(src, from, to, [args,] [opts,] callback);
 pdc(inputFile, 'markdown', 'html', ['--template=smashingtemplate'], function(err, result) {
-  if (err)
-    throw err;
-
-  console.log(result);
-  fs.writeFileSync(inputFilePath+'.html', result, 'utf8');
+    if (err)
+        throw err;
+    result = replaceImgsWithFigures(result);
+    console.log(result);
+    fs.writeFileSync(inputFilePath+'.html', result, 'utf8');
 });
 
 
 
+function replaceImgsWithFigures(inputString) {
 
+    search = /<div class="figure">\n(<img .* \/>)\n<p class="caption">(.*)<\/p>\n<\/div>/;
 
+    replace = `<figure>$1<figcaption>$2</figcaption></figure>`;
+
+    output = inputString.replace(search, replace);
+    return output;
+}
