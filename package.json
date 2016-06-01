@@ -1,0 +1,19 @@
+{
+  "name": "smashingmarkdown",
+  "version": "1.0.0",
+  "description": "Convert standard markdown to smashingmagazine template",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "markdown",
+    "html",
+    "pandoc"
+  ],
+  "author": "Emerson This",
+  "license": "MIT",
+  "dependencies": {
+    "pdc": "^0.2.2"
+  }
+}
