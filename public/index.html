@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Smashing Markup</title>
+
+    <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+<div class="container">
+<h3>IN (markdown)</h3>
+
+<form class="markdown-form" id="form" action="./convert" method="post" onsubmit="onSubmit(event);">
+    <textarea id="markdown" placeholder="Paste your markdown here" name="markdown"></textarea>
+    <div class="submit-wrap"><input type="submit" value="Make Smashing Markup!"></div>
+</form>
+
+<h3>OUT (Smashing markup)</h3>
+<div class="markup-text" id="markup" placeholder="markup will appear here..."></div>
+
+</div><!-- .container -->
+
+<!-- <script src="/socket.io.js"></script>
+<script>
+  var socket = io();
+  console.log(socket);
+</script>
+ -->
+
+ <script   src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script> 
+ 
+ <script>
+    function onSubmit(e) {
+        md = document.getElementById('markdown');
+        $.post('./convert', {'markdown' : md.value}, function(data, textStatus, jqXHR){
+            $('#markup').text(data.markup);
+        });
+        e.preventDefault();
+    }
+</script>
+</body>
+</html>
