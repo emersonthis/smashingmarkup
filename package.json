@@ -2,7 +2,7 @@
   "name": "smashingmarkdown",
   "version": "1.0.0",
   "description": "Convert standard markdown to smashingmagazine template",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
