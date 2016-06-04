@@ -27,7 +27,11 @@ module.exports.mdToHtml = function (input, callback) {
         if (err) {
             deferred.reject(err)
         }
+        try {
         result = replaceImgsWithFigures(result);
+        } catch(e) {
+            console.log(e);
+        }
         deferred.promise.nodeify(callback);
         deferred.resolve(result);
     });
