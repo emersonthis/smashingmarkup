@@ -27,7 +27,7 @@ app.use(express.static("./public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
 
-app.listen(3000);
+app.listen(80);
 app.post("/convert", function(req, res){
     
     smashingMarkup.mdToHtml(req.body.markdown)
