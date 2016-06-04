@@ -36,6 +36,7 @@ app.post("/convert", function(req, res){
             res.json(responseData);
         });
 });
-console.log("Express app running on port 3000");
+var port = process.env.PORT || 3000;
+console.log(`Express app running on port ${port}`);
 
 module.exports = app;
