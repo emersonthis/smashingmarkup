@@ -6,6 +6,8 @@ var Q = require('q');
 // optional, if pandoc is not in PATH
 pdc.path = path.resolve(__dirname +'/pandoc/1.15.0.6/bin/pandoc');
 
+console.log('pdc.path', pdc.path);
+
 // var inputFilePath = process.argv[2];
 // console.log(inputFilePath);
 // var inputFile = fs.readFileSync(inputFilePath, 'utf8');
