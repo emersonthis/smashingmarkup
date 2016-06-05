@@ -4,7 +4,7 @@ var fs = require('fs');
 var Q = require('q');
 
 // optional, if pandoc is not in PATH
-pdc.path = path.resolve(__dirname +'/pandoc/1.15.0.6/bin/pandoc');
+pdc.path = path.resolve(__dirname +'/bin/pandoc/1.15.0.6/bin/pandoc');
 
 console.log('pdc.path', pdc.path);
 
