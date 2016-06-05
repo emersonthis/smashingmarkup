@@ -14,6 +14,8 @@ module.exports.mdToHtml = function (input, callback) {
 
     var deferred = Q.defer();
 
+    console.log('input', input);
+
     /*
     src is a string containing the entire source text, that shall be converted.
     from is a string containing the type of the source text (e.g. 'markdown').
