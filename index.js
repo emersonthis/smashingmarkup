@@ -15,6 +15,10 @@ module.exports.mdToHtml = function (input, callback) {
     var deferred = Q.defer();
 
     console.log('input', input);
+    //TEST
+    pdc('## Emerson', 'markdown', 'html', ['--template=smashingtemplate'], function(err, result){
+        console.log(result);
+    });
 
     /*
     src is a string containing the entire source text, that shall be converted.
