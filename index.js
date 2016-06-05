@@ -6,21 +6,9 @@ var Q = require('q');
 // optional, if pandoc is not in PATH
 pdc.path = path.resolve(__dirname +'/bin/pandoc');
 
-console.log('pdc.path', pdc.path);
-
-// var inputFilePath = process.argv[2];
-// console.log(inputFilePath);
-// var inputFile = fs.readFileSync(inputFilePath, 'utf8');
-
 module.exports.mdToHtml = function (input, callback) {
 
     var deferred = Q.defer();
-
-    console.log('input', input);
-    //TEST
-    pdc('## Emerson', 'markdown', 'html', ['--template=smashingtemplate'], function(err, result){
-        console.log(result);
-    });
 
     /*
     src is a string containing the entire source text, that shall be converted.
@@ -36,12 +24,10 @@ module.exports.mdToHtml = function (input, callback) {
             deferred.reject(err)
         }
         try {
-            console.log('result', result);
             result = replaceImgsWithFigures(result);
         } catch(e) {
             console.log(e);
-            deferred.reject(e)
-
+            deferred.reject(e);
         }
         deferred.promise.nodeify(callback);
         deferred.resolve(result);
@@ -53,13 +39,8 @@ module.exports.mdToHtml = function (input, callback) {
 
 
 function replaceImgsWithFigures(inputString) {
-
-    console.log('inputString', inputString);
-
     search = /<div class="figure">\n(<img .* \/>)\n<p class="caption">(.*)<\/p>\n<\/div>/;
-
     replace = `<figure>$1<figcaption>$2</figcaption></figure>`;
-
     output = inputString.replace(search, replace);
     return output;
 }
