@@ -28,6 +28,7 @@ module.exports.mdToHtml = function (input, callback) {
             deferred.reject(err)
         }
         try {
+            console.log('result', result);
             result = replaceImgsWithFigures(result);
         } catch(e) {
             console.log(e);
@@ -44,6 +45,8 @@ module.exports.mdToHtml = function (input, callback) {
 
 
 function replaceImgsWithFigures(inputString) {
+
+    console.log('inputString', inputString);
 
     search = /<div class="figure">\n(<img .* \/>)\n<p class="caption">(.*)<\/p>\n<\/div>/;
 
