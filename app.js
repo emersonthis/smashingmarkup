@@ -5,10 +5,16 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var app = express();
 
+app.use(function(req, res, next){
+    console.log(`${req.method} request for '${req.url}'`);
+    next();
+});
+
 app.use(express.static("./public"));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
+
 
 app.listen(process.env.PORT || 3000);
 app.post("/convert", function(req, res){

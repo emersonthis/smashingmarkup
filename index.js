@@ -1,34 +1,22 @@
-var pdc = require('pdc');
-var path = require('path');
 var fs = require('fs');
 var Q = require('q');
 
-// optional, if pandoc is not in PATH
-pdc.path = path.resolve(__dirname +'/bin/pandoc');
+var cp = require('child_process');
+var pandocPath = require('pandoc-bin').path;
 
 module.exports.mdToHtml = function (input, callback) {
 
     var deferred = Q.defer();
 
-    /*
-    src is a string containing the entire source text, that shall be converted.
-    from is a string containing the type of the source text (e.g. 'markdown').
-    to is a string containing the type of the destination text (e.g. 'html').
-    args [optional] is an array with additional command line flags (e.g. [ '-v' ] for pandoc's version).
-    opts [optional] is an object with additional options for the process. See the Node.js docs.
-    callback is a function that is called after parsing. It takes two arguments (err, result), where err is an error or null and result is a string containing the converted text.
-     */
-    // pdc(src, from, to, [args,] [opts,] callback);
-    pdc(input, 'markdown', 'html', ['--template=smashingtemplate'], function(err, result) {
-        if (err) {
-            deferred.reject(err)
-        }
-        try {
-            result = replaceImgsWithFigures(result);
-        } catch(e) {
-            console.log(e);
-            deferred.reject(e);
-        }
+    var pandoc = cp.spawn(pandocPath, ['--from=markdown', '--to=html', '--template=smashingtemplate']);
+    pandoc.stdin.write(input);
+    var result = '';
+    pandoc.stdout.on('data', function (data) {
+        console.log('stdout: ' + data);
+        result += data.toString();
+    });
+    pandoc.stdin.end();
+    pandoc.on('close', function(){
         deferred.promise.nodeify(callback);
         deferred.resolve(result);
     });
